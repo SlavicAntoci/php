@@ -16,17 +16,13 @@
 <body>
 
 <?php 
-require 'nav.php';
+include 'nav.php';
 ?>
 
 <div class="container mt-5">
   <h1>Bine ați venit în Magazinul Nostru Online!</h1>
   <p>Descoperiți cele mai bune oferte și produse de calitate.</p>
   <p>Explorați gama noastră variată de produse și bucurați-vă de experiența de cumpărare convenabilă.</p>
-
-
-     
-
 
   <div class="row">
       
@@ -54,6 +50,8 @@ require 'nav.php';
       echo '<p class="card-text">' . $row['descriere'] . '</p>';
       echo '<div class="d-flex justify-content-between align-items-center">';
       echo '<div class="btn-group">';
+      echo '<button type="button" class="btn btn-sm btn-outline-secondary">Adaugă în coș</button>';
+      echo '<button type="button" class="btn btn-sm btn-outline-secondary">Detalii</button>';
       echo '</div>';
       echo '<small class="text-muted">Preț: $' . $row['pret'] . '</small>';
       echo '</div>';
@@ -67,8 +65,8 @@ require 'nav.php';
     ?>
 </div>
 
-<?php 
-require 'foter.php';
+<?php
+include 'foter.php';
 ?>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -12,11 +12,8 @@ $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pa
 // Verificarea conexiunii
 if (!$conn) {
     echo "Eroare la conectare: " . pg_last_error($conn);
-} else {
-    echo "Conexiunea la baza de date PostgreSQL a fost realizată cu succes!";
-    // Aici poți adăuga operații suplimentare folosind conexiunea la bază de date
 }
 
 // Închiderea conexiunii
-pg_close($conn);
+//pg_close($conn);
 ?>
