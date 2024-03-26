@@ -42,9 +42,16 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Caută</button>
     </form>
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contul Meu</a>
-      </li>
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="contDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Contul
+    </a>
+    <div class="dropdown-menu" aria-labelledby="contDropdown">
+        <a class="dropdown-item" href="inregistrare.php">Înregistrare</a>
+        <a class="dropdown-item" href="autorizare.php">Autentificare</a>
+    </div>
+</li>
+
       <li class="nav-item">
         <a class="nav-link" href="#">Coș de cumpărături</a>
       </li>
