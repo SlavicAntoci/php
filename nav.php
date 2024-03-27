@@ -1,3 +1,18 @@
+<?php
+// Verificăm dacă sesiunea nu este deja activă
+if (session_status() == PHP_SESSION_NONE) {
+    // Inițiem sesiunea
+    session_start();
+}
+
+// Definim o variabilă pentru a verifica dacă utilizatorul este autentificat
+$logged_in = false;
+
+// Verificăm dacă utilizatorul este autentificat
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    $logged_in = true;
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Magazinul Meu Online</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,8 +62,16 @@
         Contul
     </a>
     <div class="dropdown-menu" aria-labelledby="contDropdown">
-        <a class="dropdown-item" href="inregistrare.php">Înregistrare</a>
-        <a class="dropdown-item" href="autorizare.php">Autentificare</a>
+        <!--<a class="dropdown-item" href="inregistrare.php">Înregistrare</a>
+        <a class="dropdown-item" href="autorizare.php">Autentificare</a>-->
+        <?php
+        if ($logged_in) {
+            echo '<a class="dropdown-item" href="delogare.php">Delogare</a>';
+        } else {
+            echo '<a class="dropdown-item" href="autorizare.php">Autentificare</a>';
+            echo '<a class="dropdown-item" href="inregistrare.php">Înregistrare</a>';
+        }
+        ?>
     </div>
 </li>
 
