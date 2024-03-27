@@ -15,7 +15,20 @@
   <div class="row justify-content-center">
     
     <div class="col-md-6">
-    <a href="index.php" class="btn btn-primary mb-3">Inapoi</a>
+   
+    <?php
+// Inițializează sesiunea (dacă nu este deja inițializată)
+session_start();
+
+// Verifică dacă există un mesaj de eroare în sesiune
+if(isset($_SESSION['error_message'])) {
+    // Afișează mesajul de eroare
+    echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
+    
+    // Șterge mesajul de eroare pentru a nu fi afișat din nou
+    unset($_SESSION['error_message']);
+}
+?> <a href="index.php" class="btn btn-primary mb-3">Inapoi</a>
       <div class="card">
         <div class="card-header">
           Autorizare

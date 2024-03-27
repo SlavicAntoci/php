@@ -1,3 +1,14 @@
+<?php
+// Verificăm dacă utilizatorul este autentificat
+session_start();
+
+// Dacă utilizatorul nu este autentificat, îl redirecționăm către pagina de autentificare
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: autorizare.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
