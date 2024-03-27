@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magazin Online</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .footer {
-      background-color: #343a40;
-      color: #fff;
-      padding: 20px 0;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 

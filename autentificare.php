@@ -20,10 +20,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Stocăm detaliile de autentificare în variabile de sesiune
         $_SESSION['logged_in'] = true;
         $_SESSION['email'] = $email;
+        // Extragem ID-ul utilizatorului din rezultatul interogării
+         
+        $row = pg_fetch_assoc($result);
+    
+    // Verificăm dacă s-a găsit un rând
+    if ($row) {
+        // Extragem valoarea coloanei "id" din array-ul asociativ
+        $_SESSION['id_utilizator'] = $row['id'];
+
+        
+        // Afisăm valoarea id-ului utilizatorului
+        //echo "ID-ul utilizatorului este: " . $_SESSION['id_utilizator'];
+    }
 
         // Redirectăm către pagina de start sau orice altă pagină dorită
         header("Location: user.php");
-        exit;
     } else {
         // Utilizatorul nu există sau parola este incorectă
         session_start();

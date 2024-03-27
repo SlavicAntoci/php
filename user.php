@@ -16,13 +16,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magazin Online</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .footer {
-      background-color: #343a40;
-      color: #fff;
-      padding: 20px 0;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -42,7 +37,7 @@ include 'nav.php';
     include 'conect.php';
 
     // Interogare pentru a selecta toate produsele
-    $sql = "SELECT imagine, denumire, descriere, pret FROM produse";
+    $sql = "SELECT id,imagine, denumire, descriere, pret FROM produse";
     $result = pg_query($conn, $sql);
 
     // Verificare dacă interogarea a returnat rezultate
@@ -61,8 +56,11 @@ include 'nav.php';
       echo '<p class="card-text">' . $row['descriere'] . '</p>';
       echo '<div class="d-flex justify-content-between align-items-center">';
       echo '<div class="btn-group">';
-      echo '<button type="button" class="btn btn-sm btn-outline-secondary">Adaugă în coș</button>';
-      echo '<button type="button" class="btn btn-sm btn-outline-secondary">Detalii</button>';
+      echo '<form method="POST" action="adauga_in_cos.php">';
+      echo '    <input type="hidden" name="id" value="' . $row["id"] . '">';
+      echo '    <button type="submit" class="btn btn-sm btn-outline-secondary" name="adauga_in_cos">Adaugă în coș</button>';
+      echo '</form>';
+            echo '<button type="button" class="btn btn-sm btn-outline-secondary">Detalii</button>';
       echo '</div>';
       echo '<small class="text-muted">Preț: $' . $row['pret'] . '</small>';
       echo '</div>';

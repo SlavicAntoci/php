@@ -22,7 +22,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Acasă <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="user.php">Acasă <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,7 +76,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Coș de cumpărături</a>
+        <a class="nav-link" href="cos_cumparaturi.php">Coș de cumpărături</a>
       </li>
     </ul>
   </div>
