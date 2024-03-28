@@ -1,3 +1,17 @@
+<?php
+// Începe o sesiun
+
+// Verifică dacă utilizatorul este autentificat și dacă da, să îl deconectezi
+/*if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    // Șterge toate variabilele de sesiune
+    session_unset();
+    
+    // Distrugerea sesiunii
+    session_destroy();
+}*/
+
+// Restul codului pentru formularul de autentificare
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

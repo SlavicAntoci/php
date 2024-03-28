@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $parola = $_POST['parola'];
 
     // Inserăm datele în baza de date folosind parametrii pentru a preveni injecțiile SQL
-    $sql = "INSERT INTO utilizatori (nume, prenume, email, parola) VALUES ($1, $2, $3, $4)";
+    $sql = "INSERT INTO utilizatori (nume, prenume, email, parola,id_rol) VALUES ($1, $2, $3, $4,2)";
     $result = pg_query_params($conn, $sql, array($nume, $prenume, $email, $parola));
 
     // Verificăm dacă inserarea s-a realizat cu succes

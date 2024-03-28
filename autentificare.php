@@ -20,28 +20,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Stocăm detaliile de autentificare în variabile de sesiune
         $_SESSION['logged_in'] = true;
         $_SESSION['email'] = $email;
-        // Extragem ID-ul utilizatorului din rezultatul interogării
-         
+
+        // Extragem ID-ul și rolul utilizatorului din rezultatul interogării
         $row = pg_fetch_assoc($result);
-    
-    // Verificăm dacă s-a găsit un rând
-    if ($row) {
-        // Extragem valoarea coloanei "id" din array-ul asociativ
-        $_SESSION['id_utilizator'] = $row['id'];
+        $id_utilizator = $row['id'];
+        $rol = $row['id_rol']; // presupunând că numele coloanei din baza de date pentru rol este 'rol'
 
-        
-        // Afisăm valoarea id-ului utilizatorului
-        //echo "ID-ul utilizatorului este: " . $_SESSION['id_utilizator'];
-    }
+        // Stocăm ID-ul utilizatorului în sesiune
+        $_SESSION['id_utilizator'] = $id_utilizator;
+        $_SESSION['id_rol'] = $rol;
 
-        // Redirectăm către pagina de start sau orice altă pagină dorită
-        header("Location: user.php");
+
+        // Redirecționăm utilizatorul în funcție de rolul său
+        if ($rol == 1) {
+            header("Location: admin.php");
+        } elseif ($rol == 2) {
+            header("Location: user.php");
+        } else {
+            // Dacă nu este nici admin, nici cumpărător, poți redirecționa către o pagină de eroare sau acțiune suplimentară
+            header("Location: index.php");
+        }
     } else {
         // Utilizatorul nu există sau parola este incorectă
         session_start();
-
         $_SESSION['error_message'] = "Email sau parolă incorecte. Te rugăm să încerci din nou.";
-
         header("Location: autorizare.php");
     }
 

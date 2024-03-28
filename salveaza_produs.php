@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pret = floatval($_POST['pret']); // Asigură că prețul este un număr
     $categorie_id = intval($_POST['categorie']); // Asigură că id-ul categoriei este un număr întreg
 
+
     // Verifică dacă a fost încărcată o imagine și filtrează numele imaginii
     if(isset($_FILES['imagine']) && $_FILES['imagine']['error'] === UPLOAD_ERR_OK) {
         $imagine_tmp_name = $_FILES['imagine']['tmp_name'];
