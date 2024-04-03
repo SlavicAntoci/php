@@ -25,9 +25,13 @@ if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SES
 </head>
 <body>
     <div class="container mt-5">
-    <a href="adauga_produs.php" class="btn btn-primary mb-3">Adaugă produs</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Produse</h2>
+            <a href="vizualizare_loguri.php" class="btn btn-outline-primary">Vizualizare loguri</a>
+            <a href="delogare.php" class="btn btn-outline-secondary">Delogare</a>
+        </div>
+        <a href="adauga_produs.php" class="btn btn-primary mb-3">Adaugă produs</a>
 
-        <h2>Produse</h2>
         <table class="table">
             <thead>
                 <tr>
