@@ -66,7 +66,11 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <a class="dropdown-item" href="autorizare.php">Autentificare</a>-->
         <?php
         if ($logged_in) {
-            echo '<a class="dropdown-item" href="delogare.php">Delogare</a>';
+          echo '<a class="dropdown-item text-center" href="profil.php">';
+          echo '<img src="imagini\user.png" alt="Imagine utilizator" class="mx-auto d-block rounded-circle" style="width: 70px; height: 70px;">';
+          echo '<div>Detalii cont</div>';
+          echo '</a>';          
+          echo '<a class="dropdown-item text-center" href="delogare.php">Delogare</a>';
         } else {
             echo '<a class="dropdown-item" href="autorizare.php">Autentificare</a>';
             echo '<a class="dropdown-item" href="inregistrare.php">Înregistrare</a>';
