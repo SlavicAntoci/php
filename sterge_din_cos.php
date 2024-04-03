@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include 'writelogs.php';
+
 // Verifică dacă există o cerere POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifică dacă utilizatorul este autentificat
@@ -19,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verifică dacă ștergerea a fost realizată cu succes
         if ($result) {
             // Redirectează utilizatorul înapoi la pagina coșului
+            write_logs('sterge din cos');
             header("Location: cos_cumparaturi.php");
             exit;
         } else {

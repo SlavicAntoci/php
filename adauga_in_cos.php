@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'writelogs.php';
 
 // Verificăm dacă utilizatorul a trimis cererea de adăugare în coș
 if(isset($_POST['adauga_in_cos'])) {
@@ -20,6 +21,8 @@ if(isset($_POST['adauga_in_cos'])) {
         // Execută interogarea
         if(pg_query($conn, $sql)) {
             // Produsul a fost adăugat cu succes în coș
+            write_logs('adauga produs in cos');
+
             header("Location: user.php");
             exit;
         } else {

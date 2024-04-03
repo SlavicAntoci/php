@@ -1,4 +1,11 @@
 <?php
+
+
+session_start();
+include 'writelogs.php';
+write_logs('vizualizare');
+
+
 // Începe o sesiun
 
 // Verifică dacă utilizatorul este autentificat și dacă da, să îl deconectezi
@@ -32,7 +39,6 @@
    
     <?php
 // Inițializează sesiunea (dacă nu este deja inițializată)
-session_start();
 
 // Verifică dacă există un mesaj de eroare în sesiune
 if(isset($_SESSION['error_message'])) {

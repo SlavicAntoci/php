@@ -1,6 +1,9 @@
 <?php
 // Începeți sesiunea
 session_start();
+include 'writelogs.php';
+write_logs('vizualizare');
+
 
 // Verificați dacă utilizatorul este autentificat și are rolul de admin
 if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SESSION['id_utilizator']) || !isset($_SESSION['id_rol']) || $_SESSION['id_rol'] !== '1') {

@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+include 'writelogs.php';
+write_logs('adaugare produs');
+
 // Include fișierul de conexiune la baza de date
 include 'conect.php';
 

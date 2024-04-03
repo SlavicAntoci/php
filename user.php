@@ -2,6 +2,9 @@
 // Verificăm dacă utilizatorul este autentificat
 session_start();
 
+include 'writelogs.php';
+write_logs('vizualizare');
+
 // Dacă utilizatorul nu este autentificat, îl redirecționăm către pagina de autentificare
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: autorizare.php");

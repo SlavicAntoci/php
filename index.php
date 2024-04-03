@@ -1,3 +1,9 @@
+<?php
+session_start();
+include 'writelogs.php';
+write_logs('vizualizare');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

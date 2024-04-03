@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+include 'writelogs.php';
+
 // Verificăm dacă s-a trimis formularul de înregistrare
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Conectare la baza de date (modificați detaliile corespunzătoare)
@@ -16,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verificăm dacă inserarea s-a realizat cu succes
     if ($result) {
+        write_logs('inregistrare');
         header("Location: autorizare.php");
     } else {
         $error_message = "Eroare la înregistrare: " . pg_last_error($conn);

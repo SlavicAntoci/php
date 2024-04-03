@@ -1,4 +1,8 @@
 <?php 
+
+session_start();
+include 'writelogs.php';
+
 // Verificăm dacă s-a trimis formularul
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Conectare la baza de date (modificați detaliile corespunzătoare)
@@ -14,9 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verificăm dacă s-a găsit un rând în baza de date (utilizatorul există)
     if (pg_num_rows($result) == 1) {
-        // Începem sesiunea
-        session_start();
-
         // Stocăm detaliile de autentificare în variabile de sesiune
         $_SESSION['logged_in'] = true;
         $_SESSION['email'] = $email;
@@ -33,11 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirecționăm utilizatorul în funcție de rolul său
         if ($rol == 1) {
+            write_logs('autentificare');
             header("Location: admin.php");
         } elseif ($rol == 2) {
+            write_logs('autentificare');
             header("Location: user.php");
         } else {
             // Dacă nu este nici admin, nici cumpărător, poți redirecționa către o pagină de eroare sau acțiune suplimentară
+            write_logs('autentificare');
             header("Location: index.php");
         }
     } else {

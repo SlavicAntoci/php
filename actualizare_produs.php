@@ -1,6 +1,9 @@
 <?php
 // Începeți sesiunea
 session_start();
+include 'writelogs.php';
+write_logs('vizualizare');
+
 
 // Verificați dacă utilizatorul este autentificat și are rolul de admin
 if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SESSION['id_utilizator']) || !isset($_SESSION['id_rol']) || $_SESSION['id_rol'] !== '1') {
@@ -71,6 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Actualizează denumirea, descrierea și prețul produsului
     $sql_actualizare = "UPDATE produse SET denumire = $1, descriere = $2, pret = $3 WHERE id = $4";
     $result_actualizare = pg_query_params($conn, $sql_actualizare, array($denumire_noua, $descriere_noua, $pret_nou, $produs_id));
+    write_logs('actualizare produs');
+
 }
 
 // Închidere conexiune la baza de date
