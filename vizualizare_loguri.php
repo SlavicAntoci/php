@@ -37,6 +37,7 @@ if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SES
                     <th>ID utilizator</th>
                     <th>ID rol</th>
                     <th>Acțiune</th>
+                    <th>Adresa Ip</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +55,7 @@ if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SES
             $offset = ($currentPage - 1) * $resultsPerPage;
 
             // Interogare pentru a selecta logurile din baza de date cu limită și offset
-            $sql = "SELECT data_ora, fisier_accesat, id_sesiune, id_user, id_rol, actiune 
+            $sql = "SELECT data_ora, fisier_accesat, id_sesiune, id_user, id_rol, actiune ,adresa_ip
                     FROM logs 
                     ORDER BY data_ora DESC 
                     LIMIT $resultsPerPage 
@@ -72,6 +73,7 @@ if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SES
                     echo '<td>' . ($row['id_user'] != NULL ? $row['id_user'] : '-') . '</td>';
                     echo '<td>' . ($row['id_rol'] != NULL ? $row['id_rol'] : '-') . '</td>';
                     echo '<td>' . $row['actiune'] . '</td>';
+                    echo '<td>' . $row['adresa_ip'] . '</td>';
                     echo '</tr>';
                 }
             } else {
