@@ -1,4 +1,5 @@
 <?php
+
 function write_logs($action){
     // Include fișierul de conectare la baza de date PostgreSQL
     include 'conectforlog.php';

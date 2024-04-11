@@ -54,6 +54,9 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
       <li class="nav-item">
         <a class="nav-link" href="noutati.php">Noutati</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="stiri.php">Stiri</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Caută produse" aria-label="Search">

@@ -6,17 +6,29 @@ write_logs('vizualizare');
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Înregistrare</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-5">
-    <a href="index.php" class="btn btn-primary mb-3">Inapoi</a>
+        <a href="index.php" class="btn btn-primary mb-3">Inapoi</a>
 
         <h2>Înregistrare</h2>
+        <?php
+        if (isset($_SESSION['success_message'])) {
+            echo '<div class="alert alert-success">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+            unset($_SESSION['success_message']);
+        } elseif (isset($_SESSION['error_message'])) {
+            echo '<div class="alert alert-danger">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
+            unset($_SESSION['error_message']);
+        }
+        
+        ?>
         <form method="post" action="procesare_inregistrare.php">
             <div class="form-group">
                 <label for="nume">Nume:</label>
@@ -42,4 +54,5 @@ write_logs('vizualizare');
         </form>
     </div>
 </body>
+
 </html>

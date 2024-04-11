@@ -11,7 +11,7 @@ $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pa
 
 // Verificarea conexiunii
 if (!$conn) {
-    echo "Eroare la conectare: " . pg_last_error($conn);
+    echo "Eroare la conectare: ";
 }
 
 // Închiderea conexiunii

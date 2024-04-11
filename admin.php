@@ -5,11 +5,9 @@ include 'writelogs.php';
 write_logs('vizualizare');
 
 
-// Verificați dacă utilizatorul este autentificat și are rolul de admin
 if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SESSION['id_utilizator']) || !isset($_SESSION['id_rol']) || $_SESSION['id_rol'] !== '1') {
-    // Utilizatorul nu este autentificat sau nu are rolul de admin, redirecționați către o altă pagină sau afișați un mesaj de eroare
-    header("Location: index.php"); // Schimbați "pagina_de_autentificare.php" cu pagina de autentificare a utilizatorului
-    exit(); // Asigurați-vă că nu se afișează niciun alt conținut al paginii dacă utilizatorul nu este autorizat
+    header("Location: index.php"); 
+    exit(); 
 }
 
 // Include fișierul de conexiune la baza de date
@@ -27,6 +25,7 @@ if (!isset($_SESSION['logged_in']) || !isset($_SESSION['email']) || !isset($_SES
     <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Produse</h2>
+            <a href="abonati_noutati.php" class="btn btn-outline-primary">Abonatii la Noutati</a>
             <a href="vizualizare_loguri.php" class="btn btn-outline-primary">Vizualizare loguri</a>
             <a href="delogare.php" class="btn btn-outline-secondary">Delogare</a>
         </div>
@@ -80,6 +79,8 @@ pg_close($conn);
 
             </tbody>
         </table>
+
+        
     </div>
 </body>
 </html>

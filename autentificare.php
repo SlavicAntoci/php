@@ -1,57 +1,68 @@
-<?php 
-
+<?php
 session_start();
 include 'writelogs.php';
 
-// Verificăm dacă s-a trimis formularul
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Conectare la baza de date (modificați detaliile corespunzătoare)
     include 'conect.php';
 
-    // Capturăm datele din formular
     $email = $_POST['email'];
     $parola = $_POST['password'];
 
-    // Verificăm dacă utilizatorul există în baza de date
-    $sql = "SELECT * FROM utilizatori WHERE email = $1 AND parola = $2";
-    $result = pg_query_params($conn, $sql, array($email, $parola));
+    $sql = "SELECT id, id_rol, parola FROM utilizatori WHERE email = $1";
+    $result = pg_query_params($conn, $sql, array($email));
 
-    // Verificăm dacă s-a găsit un rând în baza de date (utilizatorul există)
-    if (pg_num_rows($result) == 1) {
-        // Stocăm detaliile de autentificare în variabile de sesiune
-        $_SESSION['logged_in'] = true;
-        $_SESSION['email'] = $email;
-
-        // Extragem ID-ul și rolul utilizatorului din rezultatul interogării
+    if ($result) {
         $row = pg_fetch_assoc($result);
-        $id_utilizator = $row['id'];
-        $rol = $row['id_rol']; // presupunând că numele coloanei din baza de date pentru rol este 'rol'
+        $parola_hash = $row['parola'];
 
-        // Stocăm ID-ul utilizatorului în sesiune
-        $_SESSION['id_utilizator'] = $id_utilizator;
-        $_SESSION['id_rol'] = $rol;
+        if (password_verify($parola, $parola_hash)) {
 
+            $sql_user_details = "SELECT id, id_rol FROM utilizatori WHERE email = $1";
+            $result_user_details = pg_query_params($conn, $sql_user_details, array($email));
 
-        // Redirecționăm utilizatorul în funcție de rolul său
-        if ($rol == 1) {
-            write_logs('autentificare');
-            header("Location: admin.php");
-        } elseif ($rol == 2) {
-            write_logs('autentificare');
-            header("Location: user.php");
+            if ($result_user_details) {
+                $row_user_details = pg_fetch_assoc($result_user_details);
+                $id_utilizator = $row_user_details['id'];
+                $rol = $row_user_details['id_rol'];
+
+                $_SESSION['logged_in'] = true;
+                $_SESSION['email'] = $email;
+                $_SESSION['id_utilizator'] = $id_utilizator;
+                $_SESSION['id_rol'] = $rol;
+
+                if ($rol == 1) {
+                    pg_close($conn);
+                    write_logs('autentificare');
+                    header("Location: admin.php");
+                    exit(); 
+                } elseif ($rol == 2) {
+                    pg_close($conn);
+                    write_logs('autentificare');
+                    header("Location: user.php");
+                    exit(); 
+                } else {
+                    pg_close($conn);
+                    write_logs('autentificare');
+                    header("Location: index.php");
+                    exit(); 
+                }
+            } else {
+                pg_close($conn);
+                $_SESSION['error_message'] = "Eroare la autentificare. Te rugăm să încerci din nou mai târziu.";
+                header("Location: autorizare.php");
+                exit();
+            }
         } else {
-            // Dacă nu este nici admin, nici cumpărător, poți redirecționa către o pagină de eroare sau acțiune suplimentară
-            write_logs('autentificare');
-            header("Location: index.php");
+            pg_close($conn);
+            $_SESSION['error_message'] = "Email sau parolă incorecte. Te rugăm să încerci din nou.";
+            header("Location: autorizare.php");
+            exit(); 
         }
     } else {
-        // Utilizatorul nu există sau parola este incorectă
-        session_start();
-        $_SESSION['error_message'] = "Email sau parolă incorecte. Te rugăm să încerci din nou.";
+        pg_close($conn);
+        $_SESSION['error_message'] = "Eroare la autentificare. Te rugăm să încerci din nou mai târziu.";
         header("Location: autorizare.php");
+        exit(); 
     }
-
-    // Închidem conexiunea la baza de date
     pg_close($conn);
 }
-?>
